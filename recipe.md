@@ -24,7 +24,7 @@ class MusicLibrary():
     # User-facing properties:
     #   name: string
 
-    def __init__(self, list):
+    def __init__(self):
         # Parameters:
         #   name: empty list
         # Side effects:
