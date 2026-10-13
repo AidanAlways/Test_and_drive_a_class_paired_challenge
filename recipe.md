@@ -4,40 +4,48 @@ Copy this into a `recipe.md` in your project and fill it out.
 
 ## 1. Describe the Problem
 
-_Put or write the user story here. Add any clarifying notes you might have._
+As a user
+So that I can keep track of my music listening
+I want to add tracks I've listened to and see a list of them.
 
 ## 2. Design the Class Interface
 
 _Include the initializer, public properties, and public methods with all parameters, return values, and side-effects._
 
+Name class:
+class MusicLibrary()
+
+
+
 ```python
 # EXAMPLE
 
-class Reminder:
+class MusicLibrary():
     # User-facing properties:
     #   name: string
 
-    def __init__(self, name):
+    def __init__(self, list):
         # Parameters:
-        #   name: string
+        #   name: empty list
         # Side effects:
-        #   Sets the name property of the self object
+        #   None
+        library = []
         pass # No code here yet
 
-    def remind_me_to(self, task):
+    def add(self, track):
         # Parameters:
-        #   task: string representing a single task
+        #   string: track name
         # Returns:
         #   Nothing
         # Side-effects
-        #   Saves the task to the self object
+        #   Modifies the track list
         pass # No code here yet
 
-    def remind(self):
+    def list_tracks(self):
         # Returns:
-        #   A string reminding the user to do the task
+        #   List of tracks strings
         # Side-effects:
-        #   Throws an exception if no task is set
+        #   None
         pass # No code here yet
 ```
 
@@ -46,6 +54,43 @@ class Reminder:
 _Make a list of examples of how the class will behave in different situations._
 
 ``` python
+
+def test_init_empty_list():
+    music_library = MusicLibrary()
+    assert music_library.library == []
+
+def test_add_track():
+    music_library = MusicLibrary()
+    music_library.add("Mr Brightside")
+    result = music_library.library[0]
+    assert music_library.add() == ["Mr Brightside"]
+
+def test_add_2_tracks():
+    music_library = MusicLibrary()
+    music_library.add("Karma Police")
+    music_library.add("Creep")
+    result = music_library.library[0]
+    assert music_library.add() == ["Karma Police", "Creep"]
+
+def test_list_tracks():
+    music_library = MusicLibrary()
+    music_library.add("Mr Brightside")
+    result = music_library.list()
+    assert result == ["Mr Brightside"]
+
+def test_empty_track():
+    music_library = MusicLibrary()
+    with pytest.raises(Exception) as error:
+        music_library.add("")
+    error_message = str(error.value)
+    assert error_message == "Can't add a track without a name."
+
+def test_adds_track_then_list():
+    music_library = MusicLibrary()
+    music_library.add("Mr Brightside")
+    result = music_library.list()
+    assert result == ["Mr Brightside"]
+
 # EXAMPLE
 
 """
